@@ -1,27 +1,24 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {MatDialog} from '@angular/material';
+import {DialogComponentMock} from './dialog/dialog.component.mock';
+import {Observable, of} from 'rxjs';
+
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let dialog: DialogComponentMock;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+      providers: [{provide: MatDialog, useClass: DialogComponentMock}, AppComponent],
     }).compileComponents();
+    component = TestBed.get(AppComponent);
+    dialog = TestBed.get(MatDialog);
   }));
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
-  it(`should have as title 'ng-test'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ng-test');
-  }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to ng-test!');
-  }));
+
+  it('should open the dialog', () => {
+      dialog.open.and.returnValue(of({}));
+      component.openDialog();
+      expect(dialog.open).toHaveBeenCalled();
+  });
 });

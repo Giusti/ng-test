@@ -1,4 +1,5 @@
 import { AppPage } from './app.po';
+import {browser, by} from 'protractor';
 
 describe('workspace-project App', () => {
   let page: AppPage;
@@ -7,8 +8,17 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should open and close the dialog', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to ng-test!');
+    browser.findElement(by.id('button')).click();
+    expect(browser.findElement(by.id('dialog')).isDisplayed()).toBe(true);
+    browser.actions().mouseMove({x: 20, y: 20}).perform();
+    browser.waitForAngular();
+    browser.findElement(by.className('cdk-overlay-container')).click();
+    browser.waitForAngular();
+    browser.waitForAngular();
+    browser.waitForAngular();
+    browser.waitForAngular();
+    expect(browser.findElement(by.id('dialog')).isDisplayed()).toBe(false);
   });
 });

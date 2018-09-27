@@ -5,16 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import {DialogComponent} from './dialog/dialog.component';
 
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDialogModule} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, MatToolbarModule, MatTableModule, MatFormFieldModule, MatDialogModule, BrowserAnimationsModule ],
+  imports:      [ BrowserModule, FormsModule, NgbModule ],
   declarations: [ AppComponent, DialogComponent ],
   bootstrap:    [ AppComponent ],
+  providers: [DialogComponent],
   entryComponents: [
     DialogComponent
   ]
